@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="qiApp">
+<head>
+    <title>QuantInsti | Assignment </title>
+    <link rel="stylesheet" href="/stylesheets/screen.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/loading-bar.min.css" />
+    <link rel="stylesheet" href="/css/sweetalert.css" />
+    <script src="js/tether.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/qi_index.js"></script>
+    <script src="js/loading-bar.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.0.1.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.autocomplete.js"></script>
+</head>
+<body ng-controller="parentController">
+<div id="loading-bar-container"></div>
+<div class="container-fluid">
+    <header>
+        <nav class="navbar navbar-light ">
+            <a class="navbar-brand" href="#">
+                <img src="http://162.144.131.100/~quantins/wp-content/uploads/2016/05/qi-pioneer-logo.png" alt="" scale="0">
+                <span class="inline-block brand-name">Assignment Work</span>
+            </a>
+        </nav>
+    </header>
+    <section class="main">
+        <div class="row">
+            <div class="col-md-9 col-xs-12 col-sm-12 website-listing">
+                <div class="web-listing-item col-md-3" ng-repeat="product in productList">
+                    <div class="product">
+                        <div class="avatar inline-block">
+                            <img class="img-rounded" ng-src="img/{{(($index%10)+1)+'.png'}}">
+                        </div>
+                        <div class="website-info inline-block">
+                            <div class="website-name">{{product.product_name}}</div>
+                            <div class="website-details">
+                                <div class="tag inline">
+                                    <span ng-class="product.status<1?'fa fa-arrow-down':'fa fa-arrow-up'"></span>
+                                    <span class="tag-info">{{product.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;width: 100%;" class="col-md-12">
+                    <ul ng-if="productList.length" uib-pagination total-items="totalCount" ng-model="data.currentPage" max-size="10" items-per-page="20" class="pagination" boundary-links="true" force-ellipses="true" rotate="true"  previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getMoreProducts()"></ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 add-website">
+                <form name="addOrderForm" ng-submit="addProduct(addOrderForm.$valid)" novalidate>
+                    <h4>Buy / Sell Product </h4>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Select Product</label>
+                        <select class="form-control" id="product" ng-options="product as product.product_name for product in productListAll track by product.product_id" ng-model="newOrder.selectedProduct" required>
+                            <option value="">Select Product</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="buy_sell">Buy / Sell</label>
+                        <select class="form-control" id="buy_sell" ng-model="newOrder.selectedOp" required>
+                            <option value=""> Select Option </option>
+                            <option value="-1">Buy</option>
+                            <option value="1">Sell</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">Quantity</label>
+                        <input type="number" class="form-control form-control-cs"  placeholder="quantity of product" ng-model="newOrder.quantity" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span> Submit </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
