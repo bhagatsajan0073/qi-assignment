@@ -17,7 +17,7 @@ b) Node js task
     2. Go to Project folder containing Server.js
     3. execute the command "node server.js"
     4. Open the browser and go to this url  "localhost:8080"
-    5. A live demo is running on the ec2 server "http://52.33.208.216/"
+    5. A live demo is running on the ec2 server "http://52.37.80.136/"
 
 
 ####################################### how it works #################################################
